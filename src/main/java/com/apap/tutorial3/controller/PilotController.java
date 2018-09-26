@@ -78,7 +78,7 @@ public class PilotController {
 	}
 	
 	@RequestMapping(value= {"/pilot/delete/id/","/pilot/delete/id/{id}"})
-	public String delete (@PathVariable Optional<String> id) {
+	public String delete (@PathVariable Optional<String> id, Model model) {
 		if (id.isPresent()) {
 			PilotModel archive = pilotService.getPilotById(id.get());
 			
@@ -88,7 +88,6 @@ public class PilotController {
 			
 			pilotService.deletePilot(id.get());
 			return "view-deleted";
-			
 		} else {
 			return "view-error";
 		}
