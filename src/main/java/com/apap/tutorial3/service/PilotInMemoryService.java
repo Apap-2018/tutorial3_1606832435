@@ -37,11 +37,7 @@ public class PilotInMemoryService implements PilotService{
 
 	@Override
 	public void deletePilot(String id) {
-		for (PilotModel pilotModel : archivePilot) {
-			if (pilotModel.getId().equalsIgnoreCase(id)) {
-				archivePilot.remove(pilotModel);
-			} 
-		}
+		archivePilot.removeIf(pilot -> pilot.getId().equalsIgnoreCase(id));
 	}
 
 	@Override
