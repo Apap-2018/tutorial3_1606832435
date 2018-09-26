@@ -77,16 +77,21 @@ public class PilotController {
 		}
 	}
 	
-	@RequestMapping(value= {"/pilot/delete/id/","/pilot/delete/id/{licenseNumber}"})
-	public String delete (@PathVariable Optional<String> licenseNumber, Model model) {
-		PilotModel archive = pilotService.getPilotDetailByLicenseNumber(licenseNumber.get());
-		
-		if (archive == null) {
+	@RequestMapping(value= {"/pilot/delete/id/","/pilot/delete/id/{id}"})
+	public String delete (@PathVariable Optional<String> id) {
+		if (id.isPresent()) {
+			PilotModel archive = pilotService.getPilotById(id.get());
+			
+			if (archive == null) {
+				return "view-error";
+			}
+			
+			pilotService.deletePilot(id.get());
+			return "view-deleted";
+			
+		} else {
 			return "view-error";
 		}
-		
-		pilotService.deletePilot(licenseNumber.get());
-		return "view-deleted";
 	}
 	
 	

@@ -30,19 +30,27 @@ public class PilotInMemoryService implements PilotService{
 		for (PilotModel pilotModel : archivePilot) {
 			if (pilotModel.getLicenseNumber().equalsIgnoreCase(licenseNumber)) {
 				return pilotModel;
-			} else {
-				return null;
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public void deletePilot(String licenseNumber) {
+	public void deletePilot(String id) {
 		for (PilotModel pilotModel : archivePilot) {
-			if (pilotModel.getLicenseNumber().equalsIgnoreCase(licenseNumber)) {
+			if (pilotModel.getId().equalsIgnoreCase(id)) {
 				archivePilot.remove(pilotModel);
 			} 
 		}
+	}
+
+	@Override
+	public PilotModel getPilotById(String id) {
+		for (PilotModel pilotModel : archivePilot) {
+			if (pilotModel.getId().equalsIgnoreCase(id)) {
+				return pilotModel;
+			}
+		}
+		return null;
 	}
 }
